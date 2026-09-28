@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Quiz de 8 perguntas sobre neuroliderança, liderança vulnerável e segurança psicológica. Em português ou inglês.">
+<meta property="og:title" content="Liderança do Milhão">
+<meta property="og:description" content="Você reconheceria uma liderança vulnerável na prática? Responda 8 perguntas antes que o tempo acabe.">
+<meta property="og:type" content="website">
+<title>Liderança do Milhão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --night:#07051c; --indigo:#150d52; --royal:#22188a; --panel:#10164f; --panel2:#1b2a9c;
+  --gold:#ffd24d; --gold-deep:#d58d0b; --gold-soft:#ffe6a6;
+  --ink:#f5f2ff; --muted:#b9b2e6; --line:rgba(255,210,77,.35);
+  --ok:#22c55e; --ok-deep:#0b7133; --bad:#ff4d6d; --lock:#ff9a1f; --cyan:#7fd0ff;
+  --font:'Poppins',ui-rounded,'Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--night);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 30%,#2c1a86 0%,var(--indigo) 45%,var(--night) 100%)}
+.bg::before{content:"";position:absolute;left:50%;top:30%;width:260vmax;height:260vmax;margin:-130vmax 0 0 -130vmax;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,rgba(255,205,80,.07) 0deg 5deg,transparent 5deg 15deg);
+  -webkit-mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.5) 22%,transparent 50%);mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.5) 22%,transparent 50%);
+  animation:spin 120s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.bg::before{animation:none}*{transition:none!important;animation:none!important}}
+#app{position:relative;z-index:1;min-height:100%;padding-inline:clamp(16px,3vw,48px);padding-block:clamp(16px,2.5vw,36px);max-width:1500px;margin:0 auto;display:flex;flex-direction:column}
+.gold{background:linear-gradient(180deg,#fff3c4 0%,var(--gold) 40%,#e89b12 75%,#ffcf4a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.1}
+.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,textarea:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.btn{border:0;border-radius:999px;padding:.85em 1.6em;font-weight:700;font-size:1rem;letter-spacing:.02em;display:inline-flex;align-items:center;gap:.5em;justify-content:center}
+.btn-gold{background:linear-gradient(180deg,#fff0b0,var(--gold) 45%,#e8a21a);color:#1a1060;box-shadow:0 6px 0 #8a5a00,0 10px 30px rgba(255,190,60,.35)}
+.btn-gold:active{transform:translateY(3px);box-shadow:0 3px 0 #8a5a00}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--ink);border:2px solid rgba(255,255,255,.18)}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:clamp(12px,2vw,28px)}
+.brand{font-weight:800;font-size:clamp(1.05rem,1.6vw,1.5rem);letter-spacing:.06em}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.tools .btn{padding:.5em 1em;font-size:.85rem}
+[hidden]{display:none!important}
+
+/* home */
+.home{flex:1;display:grid;place-items:center;align-content:center;text-align:center;gap:24px;padding-block:4vh}
+.logo{font-weight:900;line-height:1.02;letter-spacing:.02em;filter:drop-shadow(0 5px 0 #6b3b00) drop-shadow(0 0 30px rgba(255,190,60,.45))}
+.logo .l1{font-size:clamp(2.6rem,8vw,6.5rem);display:block}
+.logo .l2{font-size:clamp(3.2rem,10vw,8.2rem);display:block}
+.logo small{font-size:.5em;vertical-align:middle;margin-right:.15em}
+.home p.lead{max-width:40ch;margin:0 auto;color:var(--muted);font-size:clamp(1rem,1.6vw,1.25rem)}
+.modes{display:grid;grid-template-columns:repeat(2,minmax(0,300px));gap:18px;justify-content:center;margin-top:8px}
+.mode{background:linear-gradient(180deg,rgba(34,24,138,.75),rgba(16,22,79,.9));border:2px solid var(--line);border-radius:28px;padding:26px 24px;text-align:left;color:var(--ink);display:flex;flex-direction:column;gap:8px}
+.mode:hover{border-color:var(--gold);transform:translateY(-2px)}
+.mode strong{font-size:1.3rem}
+.mode span{color:var(--muted);font-size:.95rem}
+.mode .tag{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.14em;color:#1a1060;background:var(--gold);padding:4px 10px;border-radius:999px}
+@media (max-width:640px){.modes{grid-template-columns:1fr}}
+
+/* setup */
+.setup{max-width:820px;margin:0 auto;width:100%;display:grid;gap:20px}
+.panel{background:linear-gradient(180deg,rgba(27,20,110,.8),rgba(12,10,50,.92));border:2px solid var(--line);border-radius:28px;padding:clamp(20px,3vw,36px)}
+.setup label{font-weight:700;display:block;margin-bottom:8px}
+textarea,select,input[type=text]{width:100%;background:rgba(0,0,0,.35);color:var(--ink);border:2px solid rgba(255,255,255,.18);border-radius:16px;padding:14px 16px;font:inherit;font-size:1rem}
+textarea{min-height:220px;resize:vertical;line-height:1.6}
+.hint{color:var(--muted);font-size:.9rem;margin-top:8px}
+.row{display:flex;gap:16px;flex-wrap:wrap;align-items:end}
+.row>*{flex:1 1 200px}
+.howto{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.howto div{background:rgba(255,255,255,.05);border-radius:16px;padding:12px;text-align:center;font-size:.9rem;color:var(--muted)}
+.howto b{display:block;font-size:1.6rem;color:var(--gold)}
+@media (max-width:560px){.howto{grid-template-columns:repeat(2,1fr)}}
+
+/* game layout */
+.game{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:clamp(16px,2vw,32px);align-items:start}
+@media (max-width:900px){.game{grid-template-columns:1fr}.ladder{order:-1}}
+.ladder{display:flex;flex-direction:column-reverse;gap:6px}
+@media (max-width:900px){.ladder{flex-direction:row;overflow-x:auto;padding-bottom:4px}.rung{flex:0 0 auto}}
+.rung{display:flex;justify-content:space-between;gap:10px;padding:8px 16px;border-radius:999px;border:2px solid rgba(255,210,77,.25);color:rgba(255,230,160,.55);font-weight:700;font-size:.92rem;font-variant-numeric:tabular-nums}
+.rung.cur{background:linear-gradient(180deg,#ffe58a,#e7a51a);color:#241064;border-color:#fff3c4;box-shadow:0 0 24px rgba(255,200,70,.6)}
+.rung.done{border-color:rgba(34,197,94,.6);color:#b6ffd0;background:rgba(34,197,94,.14)}
+.rung.top{border-color:var(--gold)}
+
+.stage{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,24px)}
+.qhead{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.qnum{font-weight:800;font-size:clamp(1rem,1.5vw,1.3rem);letter-spacing:.08em}
+.qprize{background:#fff;color:#1a1060;font-weight:800;border-radius:999px;padding:6px 18px;font-size:clamp(.9rem,1.3vw,1.15rem)}
+.qprize.million{background:var(--bad);color:#fff}
+
+.loz{position:relative;clip-path:polygon(28px 0,calc(100% - 28px) 0,100% 50%,calc(100% - 28px) 100%,28px 100%,0 50%);background:linear-gradient(180deg,#ffe58a,var(--gold-deep) 50%,#ffd24d);padding:4px}
+.loz>.in{clip-path:polygon(26px 0,calc(100% - 26px) 0,100% 50%,calc(100% - 26px) 100%,26px 100%,0 50%);background:linear-gradient(180deg,#2a3fb8 0%,#101c6e 55%,#0b1352 100%);min-height:100%}
+.question .in{padding:clamp(22px,3vw,40px) clamp(40px,5vw,80px);text-align:center;font-weight:700;font-size:clamp(1.3rem,2.6vw,2.4rem);line-height:1.22;text-wrap:balance}
+.alts{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.3vw,18px)}
+@media (max-width:760px){.alts{grid-template-columns:1fr}}
+.alt{border:0;background:none;padding:0;text-align:left;color:var(--ink);font:inherit;display:block;width:100%}
+.alt .loz{height:100%;display:flex}.alt .loz>.in{flex:1}
+.alt .in{display:flex;align-items:center;gap:16px;padding:clamp(12px,1.4vw,18px) 40px clamp(12px,1.4vw,18px) 30px;min-height:clamp(76px,7vw,104px)}
+.alt .let{flex:0 0 auto;width:clamp(44px,4vw,60px);height:clamp(44px,4vw,60px);border-radius:50%;background:linear-gradient(180deg,#fff0b0,#f1b21c);color:#1a1060;font-weight:800;font-size:clamp(1.3rem,2vw,1.9rem);display:grid;place-items:center}
+.alt .txt{font-size:clamp(1rem,1.45vw,1.35rem);font-weight:500;line-height:1.28}
+.alt .fing{margin-left:auto;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.alt.pick .in{background:linear-gradient(180deg,#ffb52e,#e06a00 60%,#b34c00)}
+.alt.ok .in{background:linear-gradient(180deg,#43e07a,#139a45 55%,var(--ok-deep))}
+.alt.ok .let{background:#fff;color:var(--ok-deep)}
+.alt.no .in{background:linear-gradient(180deg,#ff6b85,#c21d42 60%,#8a0f2c)}
+.alt.dim{opacity:.32}
+.alt:not(:disabled):hover .in{filter:brightness(1.15)}
+.alt:disabled{cursor:default}
+
+.controls{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.timer{position:relative;width:clamp(84px,8vw,120px);height:clamp(84px,8vw,120px);flex:0 0 auto}
+.timer svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer .num{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:clamp(1.8rem,3vw,2.8rem);font-variant-numeric:tabular-nums}
+.timer.low .num{color:#ff8aa0}
+.status{flex:1;font-weight:600;color:var(--gold-soft);font-size:clamp(1rem,1.5vw,1.3rem);min-width:180px}
+
+.explain{background:linear-gradient(180deg,rgba(30,20,90,.95),rgba(12,8,50,.97));border:3px solid var(--gold);border-radius:28px;padding:clamp(18px,2.4vw,32px);display:grid;gap:10px;box-shadow:0 0 40px rgba(255,200,70,.2)}
+.explain .why{font-weight:800;letter-spacing:.12em;font-size:.9rem;color:var(--gold)}
+.explain p{margin:0;font-size:clamp(1.05rem,1.6vw,1.45rem);line-height:1.4;max-width:70ch}
+.chip{display:inline-block;align-self:start;justify-self:start;padding:6px 16px;border-radius:999px;font-weight:700;font-size:.8rem;letter-spacing:.1em;border:2px solid var(--cyan);color:#dbe9ff;background:rgba(127,208,255,.1)}
+
+.marks h3{font-size:clamp(1.1rem,1.6vw,1.4rem);margin-bottom:4px}
+.marks .sub{color:var(--muted);font-size:.92rem;margin-bottom:12px}
+.people{display:flex;flex-wrap:wrap;gap:8px}
+.person{border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:var(--ink);border-radius:999px;padding:8px 16px;font-weight:600;font-size:1rem}
+.person[aria-pressed="true"]{background:var(--ok);border-color:#8ff0b3;color:#04280f}
+.person[aria-pressed="true"]::before{content:"✓ "}
+
+/* ranking */
+.rank{max-width:980px;margin:0 auto;width:100%;display:grid;gap:18px}
+.rank-title{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.rank-title h2{font-size:clamp(1.8rem,4vw,3.2rem);font-weight:900}
+.board{position:relative}
+.rowr{position:absolute;left:0;right:0;display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:14px;padding:0 18px;border-radius:18px;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.08);transition:transform .8s cubic-bezier(.2,.9,.2,1)}
+.rowr .pos{font-weight:800;font-size:1.3rem;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.rowr .nm{font-weight:700;font-size:clamp(1rem,1.6vw,1.3rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;position:relative;z-index:1}
+.rowr .bar{position:absolute;left:0;top:0;bottom:0;border-radius:16px;background:linear-gradient(90deg,rgba(255,210,77,.22),rgba(255,210,77,.05));transition:width .9s ease}
+.rowr .sc{font-weight:800;font-variant-numeric:tabular-nums;font-size:clamp(1rem,1.6vw,1.3rem);color:var(--gold-soft);position:relative;z-index:1;display:flex;gap:10px;align-items:center}
+.rowr .gain{font-size:.8rem;color:#8ff0b3;font-weight:700}
+.rowr.p1{border-color:var(--gold);background:rgba(255,210,77,.1)}
+.rowr.p1 .pos{color:var(--gold)}
+.rowr.p2 .pos{color:#dfe6f5}.rowr.p3 .pos{color:#e7a36b}
+
+/* podium */
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;max-width:860px;margin:10px auto 0;width:100%}
+.pod{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.pod .nm{font-weight:800;font-size:clamp(1rem,2vw,1.6rem);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pod .sc{color:var(--gold-soft);font-weight:700;font-variant-numeric:tabular-nums}
+.pod .blk{width:100%;border-radius:20px 20px 6px 6px;display:grid;place-items:center;font-weight:900;font-size:clamp(2rem,5vw,4rem);color:#1a1060}
+.pod.g .blk{height:clamp(150px,22vw,260px);background:linear-gradient(180deg,#fff0b0,var(--gold) 40%,#c98a0a)}
+.pod.s .blk{height:clamp(110px,16vw,190px);background:linear-gradient(180deg,#ffffff,#c9d1e6 50%,#8e98b3)}
+.pod.b .blk{height:clamp(80px,12vw,140px);background:linear-gradient(180deg,#ffd8b0,#e7a36b 50%,#a8663a)}
+
+.dot{display:inline-block;width:.75em;height:.75em;border-radius:50%;margin-right:.5em;vertical-align:baseline;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.seg{display:inline-flex;gap:6px;background:rgba(0,0,0,.3);padding:6px;border-radius:999px;flex:0 0 auto}
+.lang .segb{width:auto;height:auto;padding:.45em .9em;font-size:.85rem}
+.segb{border:0;background:transparent;color:var(--ink);font-weight:800;font-size:1.1rem;width:52px;height:44px;border-radius:999px}
+.segb[aria-checked="true"]{background:linear-gradient(180deg,#fff0b0,var(--gold) 45%,#e8a21a);color:#1a1060}
+.groups{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:560px){.groups{grid-template-columns:1fr}}
+.person{font-size:clamp(1.05rem,1.6vw,1.35rem);padding:12px 24px}
+.person[aria-pressed="true"] .dot{box-shadow:0 0 0 2px #04280f}
+.rowr .nm{font-size:clamp(1.2rem,2.2vw,1.8rem)}.rowr .sc{font-size:clamp(1.2rem,2.2vw,1.8rem)}
+/* solo result */
+.result{flex:1;display:grid;place-items:center;text-align:center}
+.result .big{font-size:clamp(2.6rem,9vw,6rem);font-weight:900;font-variant-numeric:tabular-nums}
+.result p{color:var(--muted);max-width:44ch;margin:8px auto 0;font-size:1.1rem}
+
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:rgba(255,77,109,.12);border:2px solid var(--bad);border-radius:999px;padding:6px 8px 6px 16px;font-weight:600;font-size:.9rem}
+.flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:5}
+.flash.go{animation:fl .5s ease-out}
+@keyframes fl{0%{opacity:.35}100%{opacity:0}}
+.pop{animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.rise{animation:rise .5s ease-out both}
+@keyframes rise{0%{transform:translateY(24px);opacity:0}100%{transform:none;opacity:1}}
+canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:6}
+</style>
+
+</head><body>
+<div class="bg"></div>
+<div class="flash" id="flash"></div>
+<canvas id="confetti"></canvas>
+<main id="app"></main>
+
+<script>
+// ---------- content (PT / EN) ----------
+const QS={
+pt:[
+ {q:'O que é liderança vulnerável?',
+  alts:['Compartilhar todos os problemas pessoais com a equipe','Reconhecer limites e admitir erros, sem abandonar a responsabilidade','Evitar conflitos para manter um ambiente agradável','Eliminar as diferenças hierárquicas entre líder e equipe'],
+  exp:'Vulnerabilidade não significa falta de autoridade. Significa reconhecer que você não precisa parecer infalível para liderar.',chip:'Vulnerabilidade ≠ fraqueza'},
+ {q:'Um liderado discorda de você na reunião. Qual região do cérebro participa da identificação disso como uma possível ameaça?',
+  alts:['Cerebelo','Amígdala','Hipocampo','Córtex visual'],
+  exp:'A amígdala participa da identificação da relevância emocional da situação. Se a crítica soa como ameaça à competência ou à autoridade, entramos em alerta e a resposta tende a ser rápida e defensiva.',chip:'Neuroliderança'},
+ {q:'E qual região ajuda a avaliar o contexto, controlar impulsos e escolher uma resposta mais consciente?',
+  alts:['Amígdala','Tronco encefálico','Córtex pré-frontal','Cerebelo'],
+  exp:'O córtex pré-frontal participa da avaliação do contexto, do controle dos impulsos e da tomada de decisão. A integração entre esses processos permite sair da reação automática.',chip:'Neuroliderança'},
+ {q:'O líder percebe: “esse comentário me incomodou”. Isso é um exemplo de:',
+  alts:['Fraqueza emocional','Autoconsciência','Perda de autoridade','Ignorar a emoção'],
+  exp:'Autoconsciência é um dos pilares da inteligência emocional. Reconhecer o incômodo não é ignorar a emoção: é perceber que ela existe e como pode influenciar a resposta. A emoção continua ali. O que muda é o que fazemos com ela.',chip:'Inteligência emocional'},
+ {q:'Qual é a forma mais adequada de questionar um líder?',
+  alts:['Evitar questionamentos, porque demonstram falta de confiança na liderança','Questionar apenas em particular, independentemente da situação','Apresentar outra perspectiva com respeito, argumentos e foco no problema, não na pessoa','Concordar no momento e comentar a discordância depois com os colegas'],
+  exp:'Uma liderança aberta à vulnerabilidade cria espaço para discordâncias respeitosas. Questionar não precisa significar desafiar a autoridade.',chip:'Segurança psicológica'},
+ {q:'Diante de uma crítica à sua decisão, qual resposta mostra um líder saindo do modo automático?',
+  alts:['“Você não conhece o contexto completo.”','“Já está decidido, vamos seguir.”','“Você trouxe um ponto que eu não tinha considerado. Me explica melhor?”','Mudar de assunto e retomar depois da reunião'],
+  exp:'É no espaço entre sentir, perceber e escolher como responder que começa a liderança vulnerável. O líder não precisa reafirmar a autoridade diante de toda discordância.',chip:'Resposta consciente'},
+ {q:'Um líder cometeu um erro que prejudicou um projeto. Qual atitude mais se aproxima da liderança vulnerável?',
+  alts:['Não mencionar o erro para preservar sua autoridade','Explicar que decidiu com as informações disponíveis e dividir a responsabilidade com a equipe','Reconhecer o erro, assumir a responsabilidade e discutir com a equipe o que pode ser aprendido','Resolver o problema sozinho para demonstrar capacidade de reação'],
+  exp:'Admitir um erro não encerra a liderança. Quando vem acompanhado de responsabilidade e ação, pode abrir espaço para aprendizado.',chip:'Responsabilidade + ação'},
+ {q:'Quando alguém se sente seguro para dizer “eu não sei”, “eu errei” ou “eu discordo”, o que isso pode indicar sobre o ambiente da equipe?',
+  alts:['Falta de respeito à hierarquia','Baixo controle da liderança','Ausência de cobrança por resultados','Maior segurança psicológica para assumir riscos interpessoais'],
+  exp:'Equipes psicologicamente seguras têm mais espaço para perguntas, erros, ideias e discordâncias, elementos importantes para aprendizagem e colaboração.',chip:'Segurança psicológica'},
+],
+en:[
+ {q:'What is vulnerable leadership?',
+  alts:['Sharing all your personal problems with the team','Acknowledging limits and admitting mistakes without giving up responsibility','Avoiding conflict to keep the atmosphere pleasant','Eliminating hierarchical differences between leader and team'],
+  exp:'Vulnerability doesn’t mean a lack of authority. It means recognizing that you don’t need to seem infallible to lead.',chip:'Vulnerability ≠ weakness'},
+ {q:'A team member disagrees with you in a meeting. Which brain region helps flag this as a possible threat?',
+  alts:['Cerebellum','Amygdala','Hippocampus','Visual cortex'],
+  exp:'The amygdala helps detect the emotional relevance of a situation. If criticism feels like a threat to your competence or authority, you go on alert and tend to respond quickly and defensively.',chip:'Neuroleadership'},
+ {q:'And which region helps assess the context, control impulses and choose a more conscious response?',
+  alts:['Amygdala','Brainstem','Prefrontal cortex','Cerebellum'],
+  exp:'The prefrontal cortex is involved in assessing context, controlling impulses and making decisions. The interplay between these processes is what lets you step out of an automatic reaction.',chip:'Neuroleadership'},
+ {q:'The leader notices: “that comment bothered me.” This is an example of:',
+  alts:['Emotional weakness','Self-awareness','Loss of authority','Ignoring the emotion'],
+  exp:'Self-awareness is one of the pillars of emotional intelligence. Acknowledging the discomfort isn’t ignoring the emotion: it’s noticing that it exists and how it may shape your response. The emotion is still there. What changes is what you do with it.',chip:'Emotional intelligence'},
+ {q:'What is the most appropriate way to question a leader?',
+  alts:['Avoid questioning, since it shows a lack of trust in leadership','Only raise it in private, regardless of the situation','Offer a different perspective respectfully, with arguments, focusing on the problem rather than the person','Agree in the moment and voice the disagreement to colleagues later'],
+  exp:'Leadership that is open to vulnerability makes room for respectful disagreement. Questioning doesn’t have to mean challenging authority.',chip:'Psychological safety'},
+ {q:'When your decision is criticized, which response shows a leader stepping out of autopilot?',
+  alts:['“You don’t know the full context.”','“It’s already decided, let’s move on.”','“You raised a point I hadn’t considered. Can you tell me more?”','Change the subject and pick it up after the meeting'],
+  exp:'Vulnerable leadership begins in the space between feeling, noticing and choosing how to respond. A leader doesn’t need to reassert authority every time someone disagrees.',chip:'Conscious response'},
+ {q:'A leader made a mistake that hurt a project. Which attitude is closest to vulnerable leadership?',
+  alts:['Not mentioning the mistake to preserve their authority','Explaining they decided with the information available and sharing the responsibility with the team','Owning the mistake, taking responsibility and discussing with the team what can be learned','Fixing the problem alone to show they can react'],
+  exp:'Admitting a mistake doesn’t end your leadership. When it comes with responsibility and action, it can open the door to learning.',chip:'Responsibility + action'},
+ {q:'When someone feels safe saying “I don’t know,” “I was wrong” or “I disagree,” what might that indicate about the team environment?',
+  alts:['Lack of respect for hierarchy','Weak leadership control','No accountability for results','Greater psychological safety to take interpersonal risks'],
+  exp:'Psychologically safe teams have more room for questions, mistakes, ideas and disagreement, which are key ingredients for learning and collaboration.',chip:'Psychological safety'},
+]};
+const PRIZES=[1000,2000,5000,10000,50000,100000,500000,1000000], OK=[1,1,2,1,2,2,2,3];
+
+const TXT={
+pt:{title:'Liderança do Milhão',playNow:'Jogar agora',meta:'8 perguntas · 20 segundos cada · explicação em todas as respostas',brand:'LIDERANÇA DO MILHÃO',logo:['LIDERANÇA','<small>DO</small>MILHÃO'],
+ eyebrow:'Neuroliderança · vulnerabilidade · segurança psicológica',
+ lead:'8 perguntas sobre o que acontece no cérebro de quem lidera quando é questionado, e por que isso importa para a equipe.',
+ tagRoom:'NA SALA',groups:'Jogar em grupos',groupsD:'Projete na tela e divida a turma em 2 a 5 grupos. Ranking e pódio ao vivo.',
+ tagPhone:'NO CELULAR',solo:'Jogar sozinho',soloD:'Responda no seu ritmo, com cronômetro e a explicação de cada resposta.',
+ resume:'Continuar o jogo dos grupos',soundOn:'Som: ligado',soundOff:'Som: desligado',full:'Tela cheia',home:'Início',prizes:'Prêmios',
+ qLabel:(i)=>i===7?'PERGUNTA DO MILHÃO':'PERGUNTA '+(i+1)+' DE 8',worth:'Valendo',finger:n=>n+(n>1?' dedos':' dedo'),
+ right:l=>'RESPOSTA CERTA: LETRA '+l,timeLeft:'Tempo restante',
+ before:'Antes de começar',theGroups:'Os grupos',howMany:'Quantos grupos?',groupWord:'Grupo',
+ nameHint:'Use o nome padrão ou deixe cada grupo escolher o seu.',perQ:'Tempo por pergunta',secs:t=>t+' segundos',start:'Começar o jogo',
+ howTitle:'Como os grupos respondem',howText:'Cada grupo combina a resposta durante o tempo. Quando o cronômetro zerar, um representante de cada grupo levanta a mão mostrando a letra com os dedos. Vocês tocam nos grupos que acertaram.',
+ fingerEq:(n,l)=>`<b>${n}</b>${n>1?'dedos':'dedo'} = ${l}`,
+ think:'Pensem na resposta…',pause:'Pausar',resumeT:'Continuar',paused:'Pausado',reveal:'Revelar resposta',timeUp:'Tempo! Mãos para cima e mostrem a resposta.',
+ whichGroups:l=>`Quais grupos acertaram a letra ${l}?`,tapGroups:(n,p)=>`Toque nos grupos que mostraram ${n} ${n>1?'dedos':'dedo'}. Cada acerto vale ${p}.`,
+ allRight:'Todos acertaram',clear:'Limpar',seeRank:'Ver ranking',afterQ:i=>`Depois da pergunta ${i} de 8`,ranking:'Ranking',fix:'Corrigir acertos',
+ seeFinal:'Ver resultado final',next:'Próxima pergunta',finalK:'Resultado final',finalH:'Qual grupo ficou milionário?',takeaway:'Para levar da brincadeira',
+ reflection:'A forma como eu reajo quando sou questionado faz minha equipe se sentir segura para discordar de mim?',
+ backRank:'Voltar ao último ranking',newGame:'Novo jogo',confirmQ:'Apagar o ranking atual?',cancel:'Cancelar',wipe:'Apagar e recomeçar',
+ pick:'Escolha antes que o tempo acabe.',correct:p=>'Certa resposta! +'+p,timeout:'O tempo acabou!',wrong:'Não foi dessa vez.',
+ youHave:(m,h,n)=>`Você tem ${m} · ${h} de ${n} certas`,seeMine:'Ver meu resultado',yourResult:'Seu resultado',hitsOf:h=>`${h} de 8 respostas certas`,
+ msgs:['Você é milionário! Gabaritou o Liderança do Milhão.','Mandou muito bem. Você reconhece liderança vulnerável na prática.','Bom caminho. Vale rever as explicações das que você errou.','Que tal jogar de novo? As explicações ajudam a fixar os conceitos.'],
+ again:'Jogar de novo',ord:n=>n+'º',
+ money:v=>'R$ '+v.toLocaleString('pt-BR'),short:v=>v>=1e6?'R$ 1 milhão':'R$ '+(v/1000).toLocaleString('pt-BR')+' mil'},
+en:{title:'Million-Dollar Leader',playNow:'Play now',meta:'8 questions · 20 seconds each · an explanation for every answer',brand:'MILLION-DOLLAR LEADER',logo:['MILLION-DOLLAR','LEADER'],
+ eyebrow:'Neuroleadership · vulnerability · psychological safety',
+ lead:'8 questions about what happens in a leader’s brain when they are questioned, and why it matters for the team.',
+ tagRoom:'IN THE ROOM',groups:'Play in teams',groupsD:'Put it on the big screen and split the room into 2 to 5 teams. Live ranking and podium.',
+ tagPhone:'ON YOUR PHONE',solo:'Play solo',soloD:'Answer at your own pace, with a timer and an explanation for every answer.',
+ resume:'Continue the team game',soundOn:'Sound: on',soundOff:'Sound: off',full:'Full screen',home:'Home',prizes:'Prizes',
+ qLabel:(i)=>i===7?'THE MILLION-DOLLAR QUESTION':'QUESTION '+(i+1)+' OF 8',worth:'For',finger:n=>n+(n>1?' fingers':' finger'),
+ right:l=>'CORRECT ANSWER: '+l,timeLeft:'Time left',
+ before:'Before you start',theGroups:'The teams',howMany:'How many teams?',groupWord:'Team',
+ nameHint:'Keep the default names or let each team pick its own.',perQ:'Time per question',secs:t=>t+' seconds',start:'Start the game',
+ howTitle:'How teams answer',howText:'Each team agrees on an answer while the timer runs. When it hits zero, one person from each team raises a hand showing the letter with their fingers. You tap the teams that got it right.',
+ fingerEq:(n,l)=>`<b>${n}</b>${n>1?'fingers':'finger'} = ${l}`,
+ think:'Think it over…',pause:'Pause',resumeT:'Resume',paused:'Paused',reveal:'Reveal answer',timeUp:'Time’s up! Hands up, show your answer.',
+ whichGroups:l=>`Which teams chose ${l}?`,tapGroups:(n,p)=>`Tap the teams that showed ${n} ${n>1?'fingers':'finger'}. Each correct answer is worth ${p}.`,
+ allRight:'Everyone got it',clear:'Clear',seeRank:'See ranking',afterQ:i=>`After question ${i} of 8`,ranking:'Ranking',fix:'Fix answers',
+ seeFinal:'See final results',next:'Next question',finalK:'Final results',finalH:'Which team became a millionaire?',takeaway:'Something to take home',
+ reflection:'Does the way I react when I’m questioned make my team feel safe to disagree with me?',
+ backRank:'Back to last ranking',newGame:'New game',confirmQ:'Delete the current ranking?',cancel:'Cancel',wipe:'Delete and restart',
+ pick:'Choose before time runs out.',correct:p=>'Correct! +'+p,timeout:'Time’s up!',wrong:'Not this time.',
+ youHave:(m,h,n)=>`You have ${m} · ${h} of ${n} correct`,seeMine:'See my result',yourResult:'Your result',hitsOf:h=>`${h} of 8 correct answers`,
+ msgs:['You’re a millionaire! A perfect score.','Great job. You can spot vulnerable leadership in practice.','Good start. Take another look at the explanations you missed.','Why not play again? The explanations help the concepts stick.'],
+ again:'Play again',ord:n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:(n%10<4?n%10:0)]),
+ money:v=>'$'+v.toLocaleString('en-US'),short:v=>v>=1e6?'$1 million':'$'+(v/1000).toLocaleString('en-US')+'K'}
+};
+let LANG='pt';
+try{const l=localStorage.getItem('ldm-lang');if(l==='en'||l==='pt')LANG=l;else if((navigator.language||'').toLowerCase().startsWith('en'))LANG='en'}catch(e){}
+const T=()=>TXT[LANG];
+const QUESTIONS=new Proxy([],{get:(o,k)=>{if(k==='length')return 8;if(k==='map')return f=>QS[LANG].map((q,i)=>f(Q(i),i));const i=+k;return Number.isInteger(i)?Q(i):undefined}});
+function Q(i){return{...QS[LANG][i],prize:PRIZES[i],ok:OK[i]}}
+const L='ABCD';
+const brl=v=>T().money(v);
+const short=v=>T().short(v);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=s=>document.querySelector(s);
+const app=$('#app');
+function setLang(l){LANG=l;try{localStorage.setItem('ldm-lang',l)}catch(e){}document.documentElement.lang=l==='en'?'en':'pt-BR';document.title=T().title}
+function gname(p){const m=/^(Grupo|Team) (\d)$/.exec(p.name);return m?T().groupWord+' '+m[2]:p.name}
+
+// ---------- state ----------
+const KEY='ldm-solo-web-v1';
+const COLORS=['#7fd0ff','#ff7eb6','#5ee38f','#ffa94d','#c9a2ff'];
+let S=load()||fresh();
+function fresh(){return{screen:'home',mode:null,players:[1,2,3,4].map(n=>({id:'g'+n,name:'Grupo '+n})),timer:20,qi:0,phase:'ask',marks:{},pick:null,solo:{score:0,hits:0},prev:null};}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));return s&&s.screen?s:null}catch(e){return null}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function scores(upto){const sc={};S.players.forEach(p=>sc[p.id]=0);
+  for(let i=0;i<upto;i++){(S.marks[i]||[]).forEach(id=>{if(id in sc)sc[id]+=PRIZES[i]})}
+  return sc;}
+function ranked(upto){const sc=scores(upto);return S.players.map(p=>({...p,score:sc[p.id]})).sort((a,b)=>b.score-a.score||a.id.localeCompare(b.id));}
+
+// ---------- sound ----------
+let AC=null,soundOn=true;
+try{soundOn=localStorage.getItem('ldm-sound')!=='off'}catch(e){}
+function beep(f,d,type='sine',vol=.15,when=0){if(!soundOn)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime+when,o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
+const sfx={tick:()=>beep(1600,.06,'sine',.08),tick2:()=>beep(2200,.08,'square',.06),
+ ok:()=>[523,659,784,1047].forEach((f,i)=>beep(f,.5,'triangle',.14,i*.09)),
+ no:()=>{beep(220,.35,'sawtooth',.08);beep(160,.45,'sawtooth',.08,.18)},
+ lock:()=>{beep(440,.12,'square',.07);beep(440,.12,'square',.07,.18)},
+ fan:()=>[392,523,659,784,1047,1319].forEach((f,i)=>beep(f,.6,'triangle',.12,i*.11))};
+function flash(){const f=$('#flash');f.classList.remove('go');void f.offsetWidth;f.classList.add('go')}
+
+// ---------- timer ----------
+let tHandle=null,tLeft=0;
+function stopTimer(){clearInterval(tHandle);tHandle=null}
+function startTimer(sec,onEnd){stopTimer();tLeft=sec;paintTimer(sec,sec);
+  tHandle=setInterval(()=>{tLeft--;paintTimer(tLeft,sec);if(tLeft>0)(tLeft<=3?sfx.tick2:sfx.tick)();if(tLeft<=0){stopTimer();onEnd()}},1000);}
+function paintTimer(left,total){const n=$('#tnum'),r=$('#tring'),w=$('#timer');if(!n)return;n.textContent=Math.max(0,left);
+  r.style.strokeDashoffset=(283*(1-Math.max(0,left)/total)).toFixed(1);r.style.stroke=left<=3?'var(--bad)':'var(--gold)';w.classList.toggle('low',left<=3)}
+const timerHTML=total=>`<div class="timer" id="timer" role="timer" aria-label="${T().timeLeft}"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="rgba(10,8,50,.85)" stroke="rgba(255,255,255,.14)" stroke-width="8"/><circle id="tring" cx="50" cy="50" r="45" fill="none" stroke="var(--gold)" stroke-width="8" stroke-linecap="round" stroke-dasharray="283" style="transition:stroke-dashoffset 1s linear"/></svg><div class="num" id="tnum">${total}</div></div>`;
+
+// ---------- common pieces ----------
+const langHTML=()=>`<div class="seg lang" role="radiogroup" aria-label="Idioma / Language">${['pt','en'].map(l=>`<button class="segb" role="radio" aria-checked="${LANG===l}" data-lang="${l}">${l.toUpperCase()}</button>`).join('')}</div>`;
+function wireLang(){document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{if(b.dataset.lang===LANG)return;const keep=tLeft,running=!!tHandle;setLang(b.dataset.lang);
+  if(running&&(S.screen==='host'||S.screen==='solo')){ // keep the clock where it was
+    render();tLeft=keep;paintTimer(keep,S.screen==='host'?S.timer:SOLO_T);}else render();})}
+function topbar(extra=''){return `<div class="topbar"><div class="brand gold">${T().brand}</div><div class="tools">${extra}
+ ${langHTML()}
+ <button class="btn btn-ghost" id="bSound" aria-pressed="${soundOn}">${soundOn?T().soundOn:T().soundOff}</button>
+ <button class="btn btn-ghost" id="bFull">${T().full}</button>
+ <button class="btn btn-ghost" id="bHome">${T().home}</button></div></div>`}
+function wireTop(){wireLang();const s=$('#bSound');if(s)s.onclick=()=>{soundOn=!soundOn;try{localStorage.setItem('ldm-sound',soundOn?'on':'off')}catch(e){}s.textContent=soundOn?T().soundOn:T().soundOff;s.setAttribute('aria-pressed',soundOn)};
+ const f=$('#bFull');if(f)f.onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}};
+ const h=$('#bHome');if(h)h.onclick=()=>{stopTimer();S.screen='home';save();render()};}
+function ladderHTML(qi,answered){return `<aside class="ladder" aria-label="${T().prizes}">${PRIZES.map((p,i)=>`<div class="rung ${i===qi&&!answered?'cur':''} ${i<qi||(i===qi&&answered)?'done':''} ${i===7?'top':''}"><span>${i+1}</span><span>${short(p)}</span></div>`).join('')}</aside>`}
+function qStage(qi,{phase,pick,host}){const q=QUESTIONS[qi],rev=phase!=='ask';
+ return `<div class="qhead"><div class="qnum gold">${T().qLabel(qi)}</div><div class="qprize ${qi===7?'million':''}">${T().worth} ${short(q.prize)}</div></div>
+ <div class="loz question pop"><div class="in">${esc(q.q)}</div></div>
+ <div class="alts">${q.alts.map((a,i)=>{let c='';if(rev){c=i===q.ok?'ok':(pick===i?'no':'dim')}else if(pick===i)c='pick';
+  return `<button class="alt ${c} rise" style="animation-delay:${.08*i}s" data-i="${i}" ${rev||host?'disabled':''}><div class="loz"><div class="in"><div class="let">${L[i]}</div><div class="txt">${esc(a)}</div>${host&&!rev?`<div class="fing">${T().finger(i+1)}</div>`:''}</div></div></button>`}).join('')}</div>`}
+function explainHTML(qi){const q=QUESTIONS[qi];return `<section class="explain rise"><div class="why">${T().right(L[q.ok])}</div><p>${esc(q.exp)}</p><span class="chip">${esc(q.chip.toUpperCase())}</span></section>`}
+
+// ---------- screens ----------
+function render(){
+ const s=S.screen;
+ if(s==='home')return home();
+ if(s==='solo')return soloQ();
+ if(s==='soloEnd')return soloEnd();
+}
+function home(){
+ const t=T();
+ app.innerHTML=`<div class="topbar" style="justify-content:flex-end">${langHTML()}</div><section class="home">
+  <div><div class="eyebrow" style="margin-bottom:14px">${t.eyebrow}</div>
+  <h1 class="logo gold"><span class="l1">${t.logo[0]}</span><span class="l2">${t.logo[1]}</span></h1></div>
+  <p class="lead">${t.lead}</p>
+  <div style="display:grid;gap:14px;justify-items:center">
+   <button class="btn btn-gold" id="mSolo" style="font-size:1.25rem;padding:1em 2.4em">${t.playNow}</button>
+   <div style="color:var(--muted);font-size:.95rem">${t.meta}</div>
+  </div>
+ </section>`;
+ wireLang();
+ $('#mSolo').onclick=()=>{S.screen='solo';S.sq=0;S.sphase='ask';S.pick=null;S.solo={score:0,hits:0};save();render()};
+}
+function setup(){
+ const t=T(),N=S.ngroups||S.players.length||4;
+ const names=[0,1,2,3,4].map(i=>(S.draft&&S.draft[i]!=null?S.draft[i]:(S.players[i]?gname(S.players[i]):t.groupWord+' '+(i+1))));
+ app.innerHTML=topbar()+`<section class="setup">
+  <div><div class="eyebrow">${t.before}</div><h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-top:6px">${t.theGroups}</h2></div>
+  <div class="panel" style="display:grid;gap:22px">
+   <div class="row" style="align-items:center"><div style="flex:0 1 auto"><div style="font-weight:700">${t.howMany}</div></div>
+    <div class="seg" role="radiogroup" aria-label="${t.howMany}">${[2,3,4,5].map(n=>`<button class="segb" role="radio" aria-checked="${n===N}" data-n="${n}">${n}</button>`).join('')}</div></div>
+   <div class="groups">${names.slice(0,N).map((nm,i)=>`<div class="gfield"><label for="gn${i}"><span class="dot" style="background:${COLORS[i]}"></span>${t.groupWord} ${i+1}</label><input type="text" id="gn${i}" maxlength="28" value="${esc(nm)}"></div>`).join('')}</div>
+   <div class="hint" style="margin-top:-8px">${t.nameHint}</div>
+   <div class="row"><div><label for="tsel">${t.perQ}</label><select id="tsel">${[10,15,20,30].map(x=>`<option value="${x}" ${S.timer===x?'selected':''}>${t.secs(x)}</option>`).join('')}</select></div>
+   <div style="flex:0 0 auto"><button class="btn btn-gold" id="go">${t.start}</button></div></div>
+   <div><div style="font-weight:700">${t.howTitle}</div><div class="hint">${t.howText}</div>
+   <div class="howto">${[1,2,3,4].map(n=>`<div>${t.fingerEq(n,L[n-1])}</div>`).join('')}</div></div>
+  </div></section>`;
+ const grab=()=>{S.draft=names.slice();for(let i=0;i<N;i++)S.draft[i]=$('#gn'+i).value};
+ wireTop();
+ // keep typed names when switching language
+ document.querySelectorAll('[data-lang]').forEach(b=>{const o=b.onclick;b.onclick=()=>{grab();S.draft=S.draft.map(x=>{const m=/^(Grupo|Team) (\d)$/.exec(x);return m?null:x});save();o()}});
+ document.querySelectorAll('.segb[data-n]').forEach(b=>b.onclick=()=>{grab();S.ngroups=+b.dataset.n;save();setup()});
+ $('#go').onclick=()=>{S.ngroups=N;S.draft=null;S.players=[...Array(N).keys()].map(i=>{const v=$('#gn'+i).value.trim();return{id:'g'+(i+1),name:(!v||v===t.groupWord+' '+(i+1))?'Grupo '+(i+1):v}});S.timer=+$('#tsel').value;S.mode='host';S.qi=0;S.phase='ask';S.marks={};S.screen='host';S.prev='host';save();render();};
+}
+function hostQ(){
+ const t=T(),qi=S.qi,rev=S.phase!=='ask',q=QUESTIONS[qi];S.prev='host';
+ app.innerHTML=topbar()+`<section class="game"><div class="stage">${qStage(qi,{phase:S.phase,host:true})}
+  ${!rev?`<div class="controls">${timerHTML(S.timer)}<div class="status" id="status" aria-live="polite">${t.think}</div>
+   <button class="btn btn-ghost" id="bStart">${t.pause}</button><button class="btn btn-gold" id="bReveal">${t.reveal}</button></div>`:
+  explainHTML(qi)+`<section class="panel marks"><h3>${t.whichGroups(L[q.ok])}</h3><div class="sub">${t.tapGroups(q.ok+1,short(q.prize))}</div>
+   <div class="people">${S.players.map(p=>`<button class="person" data-id="${p.id}" aria-pressed="${(S.marks[qi]||[]).includes(p.id)}"><span class="dot" style="background:${COLORS[+p.id.slice(1)-1]}"></span>${esc(gname(p))}</button>`).join('')}</div>
+   <div class="controls" style="margin-top:18px"><div class="tools"><button class="btn btn-ghost" id="bAll">${t.allRight}</button><button class="btn btn-ghost" id="bNone">${t.clear}</button></div>
+   <button class="btn btn-gold" id="bRank">${t.seeRank}</button></div></section>`}
+ </div>${ladderHTML(qi,rev)}</section>`;
+ wireTop();
+ if(!rev){
+  let running=true;const st=$('#status'),bs=$('#bStart');
+  const end=()=>{st.textContent=T().timeUp;sfx.lock();bs.hidden=true};
+  startTimer(S.timer,end);
+  bs.onclick=()=>{if(running){stopTimer();running=false;bs.textContent=T().resumeT;st.textContent=T().paused}else{running=true;bs.textContent=T().pause;st.textContent=T().think;const left=tLeft;startTimer(S.timer,end);tLeft=left;paintTimer(left,S.timer)}};
+  $('#bReveal').onclick=reveal;
+ }else{
+  document.querySelectorAll('.person').forEach(b=>b.onclick=()=>{const m=new Set(S.marks[qi]||[]),id=b.dataset.id;m.has(id)?m.delete(id):m.add(id);S.marks[qi]=[...m];b.setAttribute('aria-pressed',m.has(id));save()});
+  $('#bAll').onclick=()=>{S.marks[qi]=S.players.map(p=>p.id);save();render()};
+  $('#bNone').onclick=()=>{S.marks[qi]=[];save();render()};
+  $('#bRank').onclick=()=>{S.screen='rank';S.prev='rank';save();render()};
+ }
+ save();
+}
+function reveal(){stopTimer();S.phase='rev';if(!S.marks[S.qi])S.marks[S.qi]=[];save();sfx.ok();flash();render()}
+function boardHTML(list,prevPos,gains){const H=list.length<=5?88:64,G=12;
+ const place=list.map((p,i)=>list.findIndex(q=>q.score===p.score));
+ return `<div class="board" style="height:${list.length*(H+G)}px">${list.map((p,i)=>{const max=list[0].score||1,pl=place[i];
+  return `<div class="rowr ${pl<3&&p.score>0?'p'+(pl+1):''}" data-id="${p.id}" style="height:${H}px;transform:translateY(${(prevPos[p.id]??i)*(H+G)}px)" data-to="${i*(H+G)}">
+   <div class="bar" style="width:0%" data-w="${(p.score/max*100).toFixed(1)}"></div>
+   <div class="pos">${T().ord(pl+1)}</div><div class="nm"><span class="dot" style="background:${COLORS[+p.id.slice(1)-1]}"></span>${esc(gname(p))}</div><div class="sc">${gains[p.id]?`<span class="gain">+${short(gains[p.id])}</span>`:''}${brl(p.score)}</div></div>`}).join('')}</div>`}
+function animateBoard(){requestAnimationFrame(()=>requestAnimationFrame(()=>{document.querySelectorAll('.rowr').forEach(r=>{r.style.transform=`translateY(${r.dataset.to}px)`;const b=r.querySelector('.bar');b.style.width=b.dataset.w+'%'})}))}
+function rankScreen(){
+ const t=T(),qi=S.qi,now=ranked(qi+1),before=ranked(qi),prevPos={};before.forEach((p,i)=>prevPos[p.id]=i);
+ const gains={};(S.marks[qi]||[]).forEach(id=>gains[id]=PRIZES[qi]);
+ const last=qi===7;
+ app.innerHTML=topbar()+`<section class="rank"><div class="rank-title"><div><div class="eyebrow">${t.afterQ(qi+1)}</div><h2 class="gold">${t.ranking}</h2></div>
+  <div class="tools"><button class="btn btn-ghost" id="bFix">${t.fix}</button><button class="btn btn-gold" id="bNext">${last?t.seeFinal:t.next}</button></div></div>
+  ${boardHTML(now,prevPos,gains)}</section>`;
+ wireTop();animateBoard();
+ $('#bFix').onclick=()=>{S.screen='host';S.phase='rev';save();render()};
+ $('#bNext').onclick=()=>{if(last){S.screen='final';S.prev='final';save();render();return}S.qi++;S.phase='ask';S.screen='host';save();render()};
+ save();
+}
+function finalScreen(){
+ const t=T(),list=ranked(8),top=list.slice(0,3);
+ const pod=(p,cls,n)=>p?`<div class="pod ${cls} rise" style="animation-delay:${cls==='g'?.6:cls==='s'?.3:0}s"><div class="nm"><span class="dot" style="background:${COLORS[+p.id.slice(1)-1]}"></span>${esc(gname(p))}</div><div class="sc">${brl(p.score)}</div><div class="blk">${t.ord(n)}</div></div>`:'<div></div>';
+ app.innerHTML=topbar()+`<section class="rank" style="text-align:center"><div><div class="eyebrow">${t.finalK}</div><h2 class="gold" style="font-size:clamp(2rem,5vw,4rem)">${t.finalH}</h2></div>
+  <div class="podium" style="${top.length<3?'grid-template-columns:repeat(2,minmax(0,1fr));max-width:600px':''}">${pod(top[1],'s',2)}${pod(top[0],'g',1)}${top[2]?pod(top[2],'b',3):''}</div>
+  <div style="text-align:left;margin-top:10px">${boardHTML(list,{},{})}</div>
+  <div class="panel" style="text-align:left"><div class="eyebrow" style="color:var(--gold)">${t.takeaway}</div>
+  <p style="font-size:clamp(1.1rem,2vw,1.6rem);font-weight:600;margin:.5em 0 0;text-wrap:balance">${t.reflection}</p></div>
+  <div class="tools" style="justify-content:center" id="endTools"><button class="btn btn-ghost" id="bFix">${t.backRank}</button><button class="btn btn-ghost" id="bNew">${t.newGame}</button></div></section>`;
+ wireTop();animateBoard();sfx.fan();confetti();
+ $('#bFix').onclick=()=>{S.screen='rank';save();render()};
+ $('#bNew').onclick=()=>{const e=$('#endTools');e.innerHTML=`<div class="confirm">${t.confirmQ} <button class="btn btn-ghost" id="cNo">${t.cancel}</button><button class="btn btn-gold" id="cYes">${t.wipe}</button></div>`;
+  $('#cNo').onclick=()=>render();$('#cYes').onclick=()=>{const tm=S.timer,n=S.ngroups;S=fresh();S.timer=tm;S.ngroups=n;S.screen='setup';save();render()}};
+}
+// ----- solo -----
+const SOLO_T=20;
+function soloQ(){
+ const t=T(),qi=S.sq||0,rev=S.sphase==='rev',q=QUESTIONS[qi];
+ app.innerHTML=topbar()+`<section class="game"><div class="stage">${qStage(qi,{phase:rev?'rev':'ask',pick:S.pick,host:false})}
+  ${!rev?`<div class="controls">${timerHTML(SOLO_T)}<div class="status" id="status" aria-live="polite">${t.pick}</div></div>`:
+   `<div class="status" style="font-size:clamp(1.3rem,2.4vw,2rem);font-weight:800;color:${S.pick===q.ok?'var(--ok)':'var(--bad)'}">${S.pick===q.ok?t.correct(short(q.prize)):S.pick==null?t.timeout:t.wrong}</div>`+explainHTML(qi)+
+   `<div class="controls"><div class="status" style="color:var(--muted)">${t.youHave(brl(S.solo.score),S.solo.hits,qi+1)}</div><button class="btn btn-gold" id="bNext">${qi===7?t.seeMine:t.next}</button></div>`}
+ </div>${ladderHTML(qi,rev)}</section>`;
+ wireTop();
+ if(!rev){if(!tHandle)startTimer(SOLO_T,()=>answer(null));else paintTimer(tLeft,SOLO_T);document.querySelectorAll('.alt').forEach(b=>b.onclick=()=>answer(+b.dataset.i))}
+ else $('#bNext').onclick=()=>{if(qi===7){S.screen='soloEnd';save();render();return}S.sq=qi+1;S.sphase='ask';S.pick=null;save();render()};
+}
+function answer(i){if(S.sphase==='rev')return;stopTimer();S.pick=i;const q=QUESTIONS[S.sq];
+ document.querySelectorAll('.alt').forEach(b=>b.disabled=true);
+ if(i!=null){document.querySelector(`.alt[data-i="${i}"]`).classList.add('pick');sfx.lock()}
+ setTimeout(()=>{S.sphase='rev';if(i===q.ok){S.solo.score+=q.prize;S.solo.hits++;sfx.ok();flash()}else sfx.no();save();render()},i==null?200:1100);}
+function soloEnd(){
+ const t=T(),h=S.solo.hits,msg=t.msgs[h===8?0:h>=6?1:h>=4?2:3];
+ app.innerHTML=topbar()+`<section class="result"><div><div class="eyebrow">${t.yourResult}</div><div class="big gold">${brl(S.solo.score)}</div>
+  <p style="font-size:1.3rem;color:var(--ink);font-weight:700">${t.hitsOf(h)}</p><p>${msg}</p>
+  <div class="tools" style="justify-content:center;margin-top:24px"><button class="btn btn-gold" id="bAgain">${t.again}</button></div></div></section>`;
+ wireTop();if(h>=6){sfx.fan();confetti()}
+ $('#bAgain').onclick=()=>{S.sq=0;S.sphase='ask';S.pick=null;S.solo={score:0,hits:0};S.screen='solo';save();render()};
+}
+
+// ---------- confetti ----------
+function confetti(){const c=$('#confetti'),x=c.getContext('2d');if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ c.width=innerWidth;c.height=innerHeight;const cols=['#ffd24d','#fff3c4','#22c55e','#7fd0ff','#ff4d6d'];
+ const P=Array.from({length:160},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,vx:(Math.random()-.5)*3,vy:2+Math.random()*4,s:6+Math.random()*8,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:cols[Math.random()*cols.length|0]}));
+ let f=0;(function tick(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore()});if(++f<260)requestAnimationFrame(tick);else x.clearRect(0,0,c.width,c.height)})();}
+
+addEventListener('keydown',e=>{if(e.target.matches('textarea,input,select'))return;if(e.key!==' '&&e.key!=='ArrowRight')return;
+ const b=$('#bReveal')||$('#bRank')||$('#bNext');if(b){e.preventDefault();b.click()}});
+
+setLang(LANG);
+if(!['home','solo','soloEnd'].includes(S.screen))S.screen='home';
+render();
+</script>
+
+</body></html>
